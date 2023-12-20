@@ -13,6 +13,18 @@
     margin-left: 100px;
 }
 
+.right-content{
+
+    flex: 1 1;
+    margin-right: 100px;
+
+    #bg-img{
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+}
+
 .main-text{
     font-family: $font;
     font-size: 64px;
