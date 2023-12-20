@@ -1,0 +1,39 @@
+@import '../../style.scss';
+
+.navbar-container{
+    background-color: $bgSoft;
+    width: 100% ;
+    height: 140px;
+    color: $textBasic;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $bgSoft;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.navbar-title{
+    font-family: $font;
+    font-size: 40px;
+    background-color: $bgSoft;
+    font-weight: bold;
+    text-decoration: none;
+    color: $textNeon;
+}
+
+.navbar-subtitle{
+    font-family: $font;
+    font-size: 40px;
+    background-color: $bgSoft;
+    font-weight: bold;
+    text-decoration: none;
+    color: $textBasic;
+}
