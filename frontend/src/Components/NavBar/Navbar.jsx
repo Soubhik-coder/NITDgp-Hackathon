@@ -16,7 +16,7 @@ const Navbar = (props) => {
           <input placeholder='Type / to search for user' id='inp'/>
           <img src="logo512.png" alt="" id='avatar'/>
         </div>
-        : ""
+        : <div className='empty-div'></div>
       }
     </div>
   )
