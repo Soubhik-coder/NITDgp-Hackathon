@@ -1,8 +1,66 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Navbar from '../../Components/NavBar/Navbar';
 import './Home.scss';
+import Web3 from 'web3';
+import { contractABI, contractAddress } from '../../contractConfig.js';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+
+  const navigate = useNavigate();
+  const [profileName,setProfileName] = useState('')
+  
+  const registerUser = async () => {
+
+    if(window.ethereum){
+      const web3 = new Web3(window.ethereum);
+      const contract = new web3.eth.Contract(contractABI,contractAddress);
+
+      try{
+        await window.eth_requestAccounts;
+        const accounts = await web3.eth.getAccounts();
+
+        console.log(accounts);
+        const result = await contract.methods.registerUser(profileName).send({from:accounts[0]});
+        console.log(result);
+
+        if(result){
+          navigate(`/${profileName}`)
+        }
+
+      }catch(error){
+        console.log(error);
+      }
+    }
+  }
+
+
+  const handleSignIn = async (event) => {
+    event.preventDefault();
+    if(window.ethereum){
+      const web3 = new Web3(window.ethereum);
+      const contract = new web3.eth.Contract(contractABI,contractAddress);
+
+      try{
+        await window.eth_requestAccounts;
+        const accounts = await web3.eth.getAccounts();
+
+        console.log(accounts);
+        const result = await contract.methods.authenticateUser().call({from:accounts[0]});
+        console.log(result);
+
+        if(result){
+          const profileName = await contract.methods.getProfileName(accounts[0]).call({from:accounts[0]});
+          navigate(`/${profileName}`)
+        }
+
+      }catch(error){
+        console.log(error);
+      }
+    }
+    
+  }
+
   return (
     <div>
       <Navbar searchBar={false}/>
@@ -11,11 +69,14 @@ const Home = () => {
           <h1 className='main-text'>Your code is in <span className='sub-text'>BlockChain</span></h1>
           <p className='description'>Start your journey towards the <br />Decentralised World</p>
           <div className='btn-container'>
-            <input type='text' spellCheck='false' placeholder='Profile Name is Mandatory!!' className='input-field' />
+            <input type='text' spellCheck='false' placeholder='Profile Name is Mandatory!!' className='input-field' 
+            value={profileName}
+            onChange={(e) => {setProfileName(e.target.value)}}
+            />
           </div>
-          <button className='btn'>START</button>
+          <button className='btn' onClick={registerUser}>Register</button>
           <div className='signin-text'>Already Have an Account, 
-            <a href="#" className='sign-in' target='_blank'>Sign In</a>
+            <a href="#" className='sign-in' onClick={handleSignIn}>Sign In</a>
           </div>
         </div>
         <div className="right-content">
