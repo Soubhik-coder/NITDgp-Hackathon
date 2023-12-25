@@ -1,23 +1,26 @@
 import React from 'react'
-import './Repocard.scss'
+import './RepoCard.scss'
+import { Link } from 'react-router-dom'
 
-const Repocard = ({ name, description, language, type, color}) => {
+const RepoCard = ({ profileName, repoName }) => {
   return (
-    <div className='repocard'>
-      <div className="header">
-        <h3 className='name'>{name}-TDoc</h3>
-        <span className="type-container">
-          <span className='type'>{type}</span>
-        </span>
-      </div>
-      <div className="language-container">
-        <span className="dot-container">
-        <div className="dot"></div>
-        </span>
-        <span className='language'>{language}</span>
-      </div>
-    </div>
+    <Link to = {`/${profileName}/${repoName}`}>
+      <span className='repocard'>
+        <div className="header">
+          <h3 className='name'>{repoName}</h3>
+          <span className="type-container">
+            <span className='type'>Public</span>
+          </span>
+        </div>
+        <div className="language-container">
+          <span className="dot-container">
+            <div className="dot"></div>
+          </span>
+          <span className='language'>JavaScript</span>
+        </div>
+      </span>
+    </Link>
   )
 }
 
-export default Repocard
+export default RepoCard

@@ -1,32 +1,260 @@
 @import "../../style.scss";
 
-.repo-container {
+$primary-color: #0366d6;
+$secondary-color: #d6e2f0;
+$light-bg: #f6f8fa;
+
+
+.code {
+    width: 120px;
+    position: relative;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    margin-right: 0px;
 }
 
-.repo-main {
-    margin-left: 100px;
-    width: 50%;
+.code-btn {
+    width: 120px;
+    margin-right: 0px;
+    background-color: $textNeon;
+    color: black;
+    border: solid 2px black;
+    padding: 8px 6px;
+    cursor: pointer;
+    width: 100px;
+    box-shadow: 0 0 transparent;
+}
 
-    .repo-header {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-        font-family: monospace;
-        width: 60%;
-        font-size: 32px;
-        color: $textBasic;
+.download {
+    width: 120px;
 
-        h2 {
-            padding-right: 20px;
+
+    .zip {
+        padding: 8px 12px;
+        color: whitesmoke;
+        text-decoration: none;
+        display: block;
+        cursor: pointer;
+    }
+
+    .zip:hover {
+        text-decoration: underline;
+    }
+}
+
+.file-list {
+    margin-top: 20px;
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid $secondary-color;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background-color: #25233d;
+
+            span {
+                margin-right: 10px;
+                color: $textBasic;
+            }
 
         }
     }
 }
 
-.access {
+th a {
+    text-decoration: none;
+    color: #9dacbd;
+    font-weight: 500;
+    background-color: #414666;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+th a:hover {
+    text-decoration: underline;
+}
+
+.repo-sidebar {
+    margin-right: 100px;
+    margin-top: 100px;
+    width: 35%;
+    padding: 10px;
+
+    .about {
+
+        h3 {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 30px;
+            font-weight: 800;
+        }
+
+        p {
+            font-size: 24px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+    }
+}
+
+.add-commit h2 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: $textNeon;
+    text-shadow: -2px -2px 3px darken($color: $textNeon, $amount: 30);
+}
+
+.file-upload-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px 0px;
+}
+
+.file-upload {
+    background-color: #25233d;
+    border: 1px solid $secondary-color;
+    border-radius: 5px;
+    padding: 20px;
+    width: 650px;
+    margin-bottom: 30px;
+
+
+    .drag-drop-area {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px dashed $secondary-color;
+        border-radius: 5px;
+        padding: 20px;
+        text-align: center;
+        height: 300px;
+
+
+        span {
+            color: $secondary-color;
+            font-size: 16px;
+        }
+
+        input {
+            display: none;
+            width: 650px;
+            height: 350px;
+        }
+    }
+
+    .select-files {
+        background-color: $bg;
+        color: $textBasic;
+        text-decoration: underline;
+    }
+}
+
+.commit-section {
+    background-color: #25233d;
+    border: 1px solid $secondary-color;
+    border-radius: 5px;
+    padding: 20px;
+    width: 400px;
+    margin-left: 80px;
+
+    input {
+
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid $secondary-color;
+        border-radius: 5px;
+        color: #f6f8fa;
+        font-family: $font;
+
+    }
+
+    button {
+        margin: 10px 0px;
+        width: 100px;
+        height: 40px;
+
+        color: $textNeon;
+        font-size: 20px;
+        background-color: darken($color: $bg, $amount: 8);
+        outline-style: ridge;
+        outline-width: 3px;
+        outline-color: darken($color: $bg, $amount: 8);
+        outline-offset: 0px;
+        border: none;
+        box-shadow: 0px 0px 5px 5px $textSoft;
+    }
+
+    button:hover {
+        background: darken($color: $bg, $amount: 4);
+    }
+
+    button:active {
+        transform: scale(0.9, 0.9);
+        box-shadow: 0px 0px 5px 4px $textNeon;
+        color: $textBasic;
+        background-color: darken($color: $bg, $amount: 10);
+    }
+}
+
+option {
+    background-color: #f6f8fa;
+}
+
+
+.repo-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.repo-main {
+    flex: 1 1;
+    margin-right: 0;
+    padding-left: 50px;
+}
+
+.repo-header {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-family: $font;
+    width: 60%;
+    padding: 5px;
+    font-size: 32px;
+    color: $textBasic;
+
+    .heading {
+        padding-right: 20px;
+    }
+
+    .access {
+        padding: 5px 10px;
+        background-color: transparent;
+        color: $textSoft;
+        border: 1px solid $textSoft;
+        border-radius: 20px;
+        font-family: $font;
+        font-size: 20px;
+    }
+}
+
+// .repo-header h2 {
+//     margin-right: 0;
+//     padding-right: 20px;
+// }
+
+.public-badge {
     padding: 5px 10px;
     background-color: transparent;
     color: $textSoft;
@@ -37,48 +265,21 @@
     margin-top: 15px;
 }
 
-.branch-dropdown {
-    // border: solid 2px red;
-    width: 600px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    padding: 10px;
+// .branch-dropdown {
+//     margin-bottom: 10px;
+//     font-family: $font;
 
-    .branch {
+//     color: white;
+//     font-size: 30px;
+// }
 
-        display: inline-block;
-
-        width: 90px;
-        height: 35px;
-
-
-        .options {
-            width: 100%;
-            height: 100%;
-            padding: 2px;
-            border: solid 2px darken($color: $bgSoft, $amount: 5);
-            border-radius: 8px;
-            font-size: 18px;
-        }
-    }
-
-    .code {
-        width: 90px;
-        height: 35px;
-        display: inline;
-
-        .code-btn {
-            width: 100%;
-            height: 100%;
-            background-color: $textNeon;
-            color: black;
-            border: solid 2px black;
-            font-size: 18px;
-        }
-    }
+.dropdown {
+    width: 60px;
+    height: 35px;
+    border-radius: 8px;
+    font-family: $font;
+    font-weight: 500;
+    background: #fff;
 }
 
 .files-list {
@@ -118,129 +319,73 @@
 
 
 .readme-container {
-    width: 600px;
-    height: 200px;
-    box-sizing: border-box;
-
-    padding: 10px;
-
-    // border: solid 2px red;
-    border-radius: 10px;
-
-    background-color: $bgSoft;
+    border: 1px solid $bg;
+    margin-top: 20px;
+    width: 60%;
 
     .readme-header {
-        height: 20%;
-        margin-top: 10px;
         background-color: $bgSoft;
+        padding: 10px;
+        border-bottom: 1px solid $textSoft;
 
         h3 {
-            margin: 0;
+            margin-bottom: 0;
             background-color: $bgSoft;
-            font-family: Arial, Helvetica, sans-serif;
+            font-size: 24px;
+            color: $textBasic;
         }
     }
 
     .readme-body {
+        padding: 20px;
         background-color: $bgSoft;
 
         p {
-            margin: 0;
-            font-size: 18px;
+            font-family: $font;
             background-color: $bgSoft;
+            font-size: 18px;
             color: $textSoft;
         }
     }
 }
 
-.add-commit {
-    h2 {
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        color: $textNeon;
-        text-shadow: 2px 2px 3px darken($color: $textNeon, $amount: 30);
-    }
-
-    .file-upload-container {
-
-        .file-upload {
-            .drag-drop-area {
-                span {
-                    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-                }
-            }
-        }
-
-
-        .commit-section {
-
-            margin: 20px 0;
-
-            #commitMessage {
-                display: block;
-                margin-bottom: 20px;
-                box-sizing: border-box;
-                width: 300px;
-                height: 30px;
-                padding: 10px 10px;
-                font-size: 18px;
-
-                color: $textBasic;
-
-                border: solid 1px $textBasic;
-            }
-
-            #commitMessage:focus {
-                border: none;
-                box-shadow: 0px 0px 5px 4px $textNeon;
-            }
-
-            #submitBtn {
-                margin: 25px 0px;
-                width: 100px;
-                height: 40px;
-
-                color: $textNeon;
-                font-size: 20px;
-                background-color: darken($color: $bg, $amount: 8);
-                outline-style: ridge;
-                outline-width: 3px;
-                outline-color: darken($color: $bg, $amount: 8);
-                outline-offset: 0px;
-                border: none;
-                box-shadow: 0px 0px 5px 5px $textSoft;
-
-            }
-
-            #submitBtn:hover {
-                background: darken($color: $bg, $amount: 6);
-            }
-
-            #submitBtn:active {
-                transform: scale(0.9, 0.9);
-                box-shadow: 0px 0px 5px 4px $textNeon;
-                color: $textBasic;
-                background-color: darken($color: $bg, $amount: 10);
-            }
-        }
-    }
+#submitBtn[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
-.repo-sidebar {
-    margin-right: 100px;
-    width: 35%;
-    padding: 10px;
+#submitBtn:hover:not([disabled]) {
+    background-color: mix($textNeon, $bg, 10%);
+}
 
-    .about {
+.branch-dropdown {
+    width: 60%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 2px;
 
-        h3 {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 30px;
-            font-weight: 800;
-        }
+    .branch {
 
-        p {
-            font-size: 24px;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        display: inline-block;
+
+        width: 90px;
+        height: 35px;
+
+
+        .options {
+            width: 100%;
+            height: 100%;
+            padding: 2px;
+            border: solid 2px darken($color: $bgSoft, $amount: 5);
+            border-radius: 8px;
+            font-size: 18px;
+
+            option {
+                background-color: $bg;
+            }
         }
     }
 }

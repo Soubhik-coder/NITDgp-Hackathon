@@ -18,20 +18,20 @@
     flex: 1 1;
     margin-right: 100px;
 
-    #bg-img{
+    .img{
         max-width: 100%;
         height: auto;
         display: block;
     }
 }
 
-.main-text{
+.maintext{
     font-family: $font;
     font-size: 64px;
     color: $textBasic;
 }
 
-.sub-text{
+.subtext{
     display: flex;
     flex-direction: column;
     font-family: $font;

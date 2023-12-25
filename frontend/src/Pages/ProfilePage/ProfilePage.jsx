@@ -1,39 +1,91 @@
-import React from 'react'
-import Navbar from '../../Components/NavBar/Navbar'
-import './ProfilePage.scss'
-import Repocard from '../../Components/Repocard/Repocard'
+import React, { useEffect, useState } from "react";
+import ProfileCard from "../../Components/ProfileCard/ProfileCard";
+import Navbar from "../../Components/NavBar/Navbar";
+import "./ProfilePage.scss";
+import RepoCreation from "../../Components/RepoCreation/RepoCreation";
+import RepoCard from "../../Components/RepoCard/RepoCard";
+import { useParams, useNavigate } from "react-router-dom";
+import { getAccounts, isOwner, getAllRepositories, object } from '../../serviceFile.js';
+
+
 
 const ProfilePage = () => {
-    return (
-        <>
-            <Navbar searchBar={true} />
-            <div className="container">
-                <div className="left-content">
-                    <div className="img-container">
-                        <img src="logo512.png" alt="" id='avatar' />
-                    </div>
-                    <div className="profile-description">
-                        <h2 className="profile-name">Rishav Raj Kumar</h2>
-                        <div className="profile-handle">rishav4101</div>
-                        <div className="follow">
-                            <span className="followers">
-                                <span className='no-followers'>20 </span>
-                                <span className='text-followers'>followers</span>
-                            </span>
-                            <span className="following">
-                                <span className='no-following'>20 </span>
-                                <span className='text-following'>following</span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div className="right-content">
-                    <h3 className="popular-repos">Popular Repositories</h3>
-                    <Repocard name={"DRepo"} language={"JavaScript"} type={"Public"}/>
-                </div>
-            </div>
-        </>
-    )
-}
 
-export default ProfilePage
+  const navigate = useNavigate();
+  const { profileName } = useParams();
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [isProfileOwner, setProfileOwner] = useState(false);
+  const [repositories, setRepositories] = useState([]);
+
+  window.ethereum.on('accountsChanged', async (acc) => {
+    await getAccounts();
+    setProfileOwner(await isOwner(profileName));
+  });
+
+  const fetchRepositories = async () => {
+    try {
+      setProfileOwner(await isOwner(profileName));
+      if(isProfileOwner){
+        setRepositories(object.allRepos);
+      }
+      else{
+        setRepositories(await getAllRepositories(profileName));
+      }
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchRepositories();
+  }, [profileName])
+
+  return (
+    <div>
+      <Navbar />
+      <div className="box">
+        <ProfileCard profilename={profileName} />
+        <div className="user-content">
+          <div className="repo-area">
+            <div className="search-and-button-container">
+              <div className="reposearch-container">
+                <input
+                  type="text"
+                  placeholder="Find a Repository"
+                  className="reposearch-bar"
+                />
+              </div>
+              {isProfileOwner && (
+                <div>
+                  <button className="button" onClick={() => setModalOpen(true)}>New</button>
+                </div>
+              )
+              }
+            </div>
+            <div className="repo-card-container">
+              {
+                repositories.map((repoName, index) =>
+                (<RepoCard
+                  key={index}
+                  profileName={profileName}
+                  repoName={repoName}
+                />
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+      {isModalOpen && (
+        <RepoCreation
+          profilename={profileName}
+          onClose={() => setModalOpen(false)}
+          setRepositories={setRepositories}
+        />
+      )}
+    </div>
+  );
+};
+
+export default ProfilePage;
