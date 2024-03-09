@@ -8,7 +8,7 @@ contract DRepo {
     mapping(address => string) public profileNameToAddr;
 
     struct Commit {
-        string CommitMsg;
+        string commitMsg;
         string ipfsURI;
     }
 
