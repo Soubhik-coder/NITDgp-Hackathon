@@ -3,10 +3,9 @@ import ProfileCard from "../../Components/ProfileCard/ProfileCard";
 import Navbar from "../../Components/NavBar/Navbar";
 import "./ProfilePage.scss";
 import RepoCreation from "../../Components/RepoCreation/RepoCreation";
-import RepoCard from "../../Components/RepoCard/Repocard";
+import RepoCard from "../../Components/RepoCard/RepoCard";
 import { useParams, useNavigate } from "react-router-dom";
 import { getAccounts, isOwner, getAllRepositories, object } from '../../serviceFile.js';
-
 
 
 const ProfilePage = () => {
