@@ -19,12 +19,13 @@ const Home = () => {
 
     try {
       await data_fetch(profileName);
-
+      
       if (object.result) {
         navigate(`/${profileName}`);
       }
     }
     catch (error) {
+      console.log("Hello");
       console.log(error);
     }
   }
